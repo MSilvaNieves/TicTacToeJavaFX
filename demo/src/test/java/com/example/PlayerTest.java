@@ -11,6 +11,36 @@ import org.junit.jupiter.api.Test;
 
 /** Unit tests for human and CPU player move behavior. */
 class PlayerTest {
+    /** Verifies the default names and that custom names can be read back. */
+    @Test
+    void playersHaveDefaultNamesAndCanSetCustomNames() {
+        HumanPlayer human = new HumanPlayer('X', new Scanner(""));
+        CpuPlayer cpu = new CpuPlayer('O', new Random(7));
+
+        assertEquals("Player #1", human.getName());
+        assertEquals("CPU #1", cpu.getName());
+
+        human.setName("Alice");
+        cpu.setName("Computer opponent");
+
+        assertEquals("Alice", human.getName());
+        assertEquals("Computer opponent", cpu.getName());
+    }
+
+    /** Verifies player names cannot be null, empty, or whitespace-only. */
+    @Test
+    void playersRejectNullOrBlankNames() {
+        HumanPlayer human = new HumanPlayer('X', new Scanner(""));
+        CpuPlayer cpu = new CpuPlayer('O', new Random(7));
+
+        assertThrows(RuntimeException.class, () -> human.setName(null));
+        assertThrows(RuntimeException.class, () -> human.setName(""));
+        assertThrows(RuntimeException.class, () -> human.setName(" \t\n"));
+        assertThrows(RuntimeException.class, () -> cpu.setName(null));
+        assertThrows(RuntimeException.class, () -> cpu.setName(""));
+        assertThrows(RuntimeException.class, () -> cpu.setName(" \t\n"));
+    }
+
     /** Verifies a human can place a marker at valid coordinates. */
     @Test
     void humanCanPlaceAMoveFromSelectedCoordinates() {
