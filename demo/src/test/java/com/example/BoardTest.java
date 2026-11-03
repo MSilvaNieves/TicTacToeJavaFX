@@ -2,6 +2,10 @@ package com.example;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +25,40 @@ class BoardTest {
         assertTrue(board.isValid(0, 0));
         assertFalse(board.isValid(-1, 0));
         assertFalse(board.isValid(3, 0));
+        assertFalse(board.isValid(0, -1));
         assertFalse(board.isValid(0, 3));
         assertTrue(board.place(0, 0, 'X'));
         assertFalse(board.isValid(0, 0));
         assertFalse(board.place(0, 0, 'O'));
         assertFalse(board.place(1, 1, 'Z'));
+        assertTrue(board.place(1, 1, 'O'));
         assertEquals('X', board.getCell(0, 0));
+        assertEquals('O', board.getCell(1, 1));
+    }
+
+    /** Verifies the board's formatted text and printed representation. */
+    @Test
+    void formatsAndDisplaysBoard() {
+        board.place(0, 0, 'X');
+        board.place(2, 2, 'O');
+        String expected = "  1   2   3\n"
+                + "1 X |   |  \n"
+                + "  -----------\n"
+                + "2   |   |  \n"
+                + "  -----------\n"
+                + "3   |   | O\n";
+
+        assertEquals(expected, board.format());
+
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        try (PrintStream capturedOut = new PrintStream(output, true, StandardCharsets.UTF_8)) {
+            System.setOut(capturedOut);
+            board.display();
+        } finally {
+            System.setOut(originalOut);
+        }
+        assertEquals(expected + System.lineSeparator(), output.toString(StandardCharsets.UTF_8));
     }
 
     /** Verifies win detection for rows, columns, and both diagonals. */
@@ -59,6 +91,15 @@ class BoardTest {
         assertTrue(board.isValid(1, 1));
         assertFalse(board.isFull());
         assertFalse(board.checkWin());
+    }
+
+    /** Verifies that every out-of-range coordinate is rejected when reading a cell. */
+    @Test
+    void rejectsOutOfBoundsCellCoordinates() {
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(-1, 0));
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(3, 0));
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(0, -1));
+        assertThrows(IndexOutOfBoundsException.class, () -> board.getCell(0, 3));
     }
 
     /** Places the supplied cells for X and verifies that they form a win. */
