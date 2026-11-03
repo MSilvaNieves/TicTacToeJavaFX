@@ -6,6 +6,7 @@ package com.example;
  */ 
 public abstract class Player {
     protected final char marker;
+    private String name;
 
     /**
      * Creates a player with the given marker.
@@ -14,10 +15,22 @@ public abstract class Player {
      * @throws IllegalArgumentException if the marker is not {@code X} or {@code O}
      */
     protected Player(char marker) {
+        this(marker, "Player #1");
+    }
+
+    /**
+     * Creates a player with the given marker and name.
+     *
+     * @param marker the player's marker, either {@code X} or {@code O}
+     * @param name the player's name
+     * @throws IllegalArgumentException if the marker is not {@code X} or {@code O}, or the name is blank
+     */
+    protected Player(char marker, String name) {
         if (marker != 'X' && marker != 'O') {
             throw new IllegalArgumentException("A player marker must be X or O");
         }
         this.marker = marker;
+        setName(name);
     }
 
     /**
@@ -27,6 +40,28 @@ public abstract class Player {
      */
     public char getMarker() {
         return marker;
+    }
+
+    /**
+     * Returns this player's name.
+     *
+     * @return this player's name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets this player's name.
+     *
+     * @param name the player's name
+     * @throws IllegalArgumentException if the name is null or blank
+     */
+    public void setName(String name) {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("A player name cannot be null or blank");
+        }
+        this.name = name;
     }
 
     /**
