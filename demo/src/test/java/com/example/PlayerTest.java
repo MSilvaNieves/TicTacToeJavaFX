@@ -27,6 +27,26 @@ class PlayerTest {
         assertEquals("Computer opponent", cpu.getName());
     }
 
+    /** Verifies sequential default names are assigned to human players. */
+    @Test
+    void humanPlayersReceiveSequentialDefaultNames() {
+        HumanPlayer first = new HumanPlayer('X', new Scanner(""));
+        HumanPlayer second = new HumanPlayer('O', new Scanner(""));
+
+        assertEquals("Player #1", first.getName());
+        assertEquals("Player #2", second.getName());
+    }
+
+    /** Verifies sequential default names are assigned to CPU players. */
+    @Test
+    void cpuPlayersReceiveSequentialDefaultNames() {
+        CpuPlayer first = new CpuPlayer('X', new Random(7));
+        CpuPlayer second = new CpuPlayer('O', new Random(8));
+
+        assertEquals("CPU #1", first.getName());
+        assertEquals("CPU #2", second.getName());
+    }
+
     /** Verifies player names cannot be null, empty, or whitespace-only. */
     @Test
     void playersRejectNullOrBlankNames() {
