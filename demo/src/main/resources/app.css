@@ -63,6 +63,11 @@
     -fx-text-fill: #e27755;
 }
 
+.winning-cell {
+    -fx-background-color: #83d6c5;
+    -fx-effect: dropshadow(gaussian, rgba(131, 214, 197, 0.75), 22, 0.35, 0, 0);
+}
+
 .hint {
     -fx-text-fill: #9eafc2;
     -fx-font-size: 13px;
