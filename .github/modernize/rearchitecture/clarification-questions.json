@@ -1,0 +1,304 @@
+{
+  "schema": "clarification-questions/v1",
+  "generated_at": "2026-11-04T14:58:54Z",
+  "user_input": "Convert the existing console Tic-Tac-Toe application to a JavaFX application with minimal changes. Preserve game rules/model behavior, add a small usable UI and appropriate tests, avoid unrelated refactors, and validate. Workspace: C:\\Users\\1fake\\TicTacToeJavaFX. User tagged PlayerTest.java but did not constrain changes to it. Stop after implementation and verification; report changed files and exact validation results.",
+  "title": "Console Tic-Tac-Toe to JavaFX",
+  "assessment_snapshot": {
+    "intro": "The workspace contains a small Java application, and the request is to replace console interaction with a minimal JavaFX UI while preserving game behavior:",
+    "bullets": [
+      "Recon found approximately 690 Java lines and one application module under demo/.",
+      "The requested target framework is JavaFX; the existing JDK/build configuration and any graphical design references have not yet been inspected.",
+      "The project is a Git repository; implementation scope is limited to the UI conversion, appropriate tests, and validation."
+    ]
+  },
+  "proposed_outcome": "Keep the current game model and rules, introduce a small usable JavaFX interface using minimal dependencies, add tests for preserved behavior, avoid unrelated refactors, and validate the resulting project.",
+  "scope": [
+    "frontend",
+    "generic"
+  ],
+  "status": "answered",
+  "questions": [
+    {
+      "id": "F1",
+      "kit": "frontend",
+      "field": "target.framework",
+      "title": "JavaFX version",
+      "question": "Which JavaFX version policy should the application use? The implementation can select a JavaFX release compatible with the project's existing JDK and build setup to minimize changes.",
+      "importance": "required",
+      "impact": 5,
+      "recommended": "Use the JavaFX version compatible with the existing JDK/build configuration",
+      "default": null,
+      "prefilled": true,
+      "prefilled_value": "Use the JavaFX version compatible with the existing JDK/build configuration",
+      "answer": {
+        "value": "Use the JavaFX version compatible with the existing JDK/build configuration",
+        "source": "user"
+      },
+      "depends_on": null,
+      "options": [
+        {
+          "value": "Use the JavaFX version compatible with the existing JDK/build configuration",
+          "label": "Use a version compatible with the existing JDK/build configuration"
+        },
+        {
+          "value": "Specify a JavaFX version",
+          "label": "Specify a JavaFX version"
+        }
+      ],
+      "allow_other": true,
+      "type": "single_select"
+    },
+    {
+      "id": "F2",
+      "kit": "frontend",
+      "field": "target.component_library",
+      "title": "JavaFX controls and styling",
+      "question": "Should the small UI use standard JavaFX controls and minimal styling, or do you require a particular JavaFX control/theme library?",
+      "importance": "required",
+      "impact": 4,
+      "recommended": "Standard JavaFX controls with minimal styling",
+      "default": null,
+      "prefilled": true,
+      "prefilled_value": "Standard JavaFX controls with minimal styling",
+      "answer": {
+        "value": "Standard JavaFX controls with minimal styling",
+        "source": "user"
+      },
+      "depends_on": null,
+      "options": [
+        {
+          "value": "Standard JavaFX controls with minimal styling",
+          "label": "Standard JavaFX controls with minimal styling"
+        },
+        {
+          "value": "A specific JavaFX UI/theme library",
+          "label": "A specific JavaFX UI/theme library"
+        }
+      ],
+      "allow_other": true,
+      "type": "single_select"
+    },
+    {
+      "id": "F3",
+      "kit": "frontend",
+      "field": "visual.screenshots",
+      "title": "Visual reference",
+      "question": "There is no graphical UI in the existing console application to screenshot. Is there a reference image or mockup for the new JavaFX window, or should the UI be designed as a small conventional Tic-Tac-Toe board?",
+      "importance": "required",
+      "impact": 3,
+      "recommended": null,
+      "default": null,
+      "prefilled": true,
+      "prefilled_value": "No existing graphical UI; use a small conventional Tic-Tac-Toe board unless a reference is provided.",
+      "answer": {
+        "value": "No existing graphical UI; use a small conventional Tic-Tac-Toe board unless a reference is provided.",
+        "source": "user"
+      },
+      "depends_on": null,
+      "type": "text",
+      "options": []
+    },
+    {
+      "id": "F4",
+      "kit": "frontend",
+      "field": "visual.design_system",
+      "title": "Visual style",
+      "question": "What design system or visual style should the JavaFX window follow? A simple default JavaFX style with a clear board and status text keeps the change minimal.",
+      "importance": "required",
+      "impact": 3,
+      "recommended": "Simple default JavaFX styling",
+      "default": "Simple default JavaFX styling",
+      "prefilled": true,
+      "prefilled_value": "Simple default JavaFX styling",
+      "answer": {
+        "value": "Simple default JavaFX styling",
+        "source": "user"
+      },
+      "depends_on": null,
+      "options": [
+        {
+          "value": "Simple default JavaFX styling",
+          "label": "Simple default JavaFX styling"
+        },
+        {
+          "value": "Match an existing project style",
+          "label": "Match an existing project style"
+        },
+        {
+          "value": "Use a supplied design reference",
+          "label": "Use a supplied design reference"
+        }
+      ],
+      "allow_other": true,
+      "type": "single_select"
+    },
+    {
+      "id": "F5",
+      "kit": "frontend",
+      "field": "compliance.accessibility",
+      "title": "Keyboard and accessibility support",
+      "question": "Should the UI follow any specific accessibility standard? At minimum, the board and controls can remain keyboard-usable with clear status and outcome text.",
+      "importance": "recommended",
+      "impact": 2,
+      "recommended": "Keyboard-usable controls and clear status text",
+      "default": "Keyboard-usable controls and clear status text",
+      "prefilled": true,
+      "prefilled_value": "Keyboard-usable controls and clear status text",
+      "answer": {
+        "value": "Keyboard-usable controls and clear status text",
+        "source": "user"
+      },
+      "depends_on": null,
+      "options": [
+        {
+          "value": "Keyboard-usable controls and clear status text",
+          "label": "Keyboard-usable controls and clear status text"
+        },
+        {
+          "value": "Target WCAG 2.1 AA where applicable",
+          "label": "Target WCAG 2.1 AA where applicable"
+        },
+        {
+          "value": "Other standard",
+          "label": "Other standard"
+        }
+      ],
+      "allow_other": true,
+      "type": "single_select"
+    },
+    {
+      "id": "F6",
+      "kit": "frontend",
+      "field": "compatibility.browsers",
+      "title": "Desktop runtime targets",
+      "question": "Which desktop operating systems or Java runtimes must the JavaFX application support?",
+      "importance": "recommended",
+      "impact": 2,
+      "recommended": null,
+      "default": "Use the existing project JDK and current development OS unless the repository indicates otherwise.",
+      "prefilled": true,
+      "prefilled_value": "Windows development workspace; preserve the repository's existing Java runtime/build compatibility.",
+      "answer": {
+        "value": "Windows development workspace; preserve the repository's existing Java runtime/build compatibility.",
+        "source": "user"
+      },
+      "depends_on": null,
+      "type": "text",
+      "options": []
+    },
+    {
+      "id": "G1",
+      "kit": "generic",
+      "field": "success.definition",
+      "title": "Definition of done",
+      "question": "Is success defined as preserving the current game rules/model behavior, providing a usable JavaFX Tic-Tac-Toe UI, adding appropriate tests, and validating the project?",
+      "importance": "required",
+      "impact": 5,
+      "recommended": "Preserve behavior, deliver usable JavaFX UI, add tests, and validate",
+      "default": "Feature parity with current behavior; all user-facing behaviors preserved.",
+      "prefilled": true,
+      "prefilled_value": "Preserve behavior/model, provide small usable JavaFX UI, add tests, validate.",
+      "answer": {
+        "value": "Preserve behavior/model, provide small usable JavaFX UI, add tests, validate.",
+        "source": "user"
+      },
+      "depends_on": null,
+      "options": [
+        {
+          "value": "Preserve behavior, deliver usable JavaFX UI, add tests, and validate",
+          "label": "Preserve behavior, deliver usable JavaFX UI, add tests, and validate"
+        },
+        {
+          "value": "Other success criteria",
+          "label": "Other success criteria"
+        }
+      ],
+      "allow_other": true,
+      "type": "single_select"
+    },
+    {
+      "id": "G2",
+      "kit": "generic",
+      "field": "out_of_scope",
+      "title": "Out-of-scope boundaries",
+      "question": "Confirm that unrelated refactors and changes beyond the Tic-Tac-Toe UI, relevant tests, and validation are out of scope.",
+      "importance": "recommended",
+      "impact": 3,
+      "recommended": "Avoid unrelated refactors; limit changes to the requested UI, tests, and validation",
+      "default": "No explicit exclusions; infer from project structure.",
+      "prefilled": true,
+      "prefilled_value": "Avoid unrelated refactors; changes may extend beyond PlayerTest.java as needed.",
+      "answer": {
+        "value": "Avoid unrelated refactors; changes may extend beyond PlayerTest.java as needed.",
+        "source": "user"
+      },
+      "depends_on": null,
+      "options": [
+        {
+          "value": "Avoid unrelated refactors; limit changes to the requested UI, tests, and validation",
+          "label": "Avoid unrelated refactors; limit changes to the requested UI, tests, and validation"
+        },
+        {
+          "value": "Other boundaries",
+          "label": "Other boundaries"
+        }
+      ],
+      "allow_other": true,
+      "type": "single_select"
+    },
+    {
+      "id": "G3",
+      "kit": "generic",
+      "field": "existing_tests.posture",
+      "title": "Existing test policy",
+      "question": "Should existing tests remain unchanged and pass, or may they be updated when needed to test the JavaFX conversion?",
+      "importance": "recommended",
+      "impact": 3,
+      "recommended": "Existing tests must pass; add or adjust only tests needed for the conversion",
+      "default": "must pass",
+      "prefilled": true,
+      "prefilled_value": "Add appropriate tests; preserve existing model behavior.",
+      "answer": {
+        "value": "Add appropriate tests; preserve existing model behavior.",
+        "source": "user"
+      },
+      "depends_on": null,
+      "options": [
+        {
+          "value": "Existing tests must pass; add or adjust only tests needed for the conversion",
+          "label": "Existing tests must pass; add or adjust only tests needed for the conversion"
+        },
+        {
+          "value": "Existing tests may be rewritten with equivalent coverage",
+          "label": "Existing tests may be rewritten with equivalent coverage"
+        },
+        {
+          "value": "Other test policy",
+          "label": "Other test policy"
+        }
+      ],
+      "allow_other": true,
+      "type": "single_select"
+    },
+    {
+      "id": "G5",
+      "kit": "generic",
+      "field": "constraints.additional",
+      "title": "Additional constraints",
+      "question": "Any additional requirements, exclusions, dependencies, or operational constraints?",
+      "importance": "optional",
+      "impact": 1,
+      "recommended": null,
+      "default": "None beyond the decisions listed in this specification.",
+      "prefilled": true,
+      "prefilled_value": "Minimal changes; preserve game rules/model behavior; add a small usable JavaFX UI and appropriate tests; avoid unrelated refactors; validate; report changed files and exact validation results; stop after implementation and verification.",
+      "answer": {
+        "value": "Minimal changes; preserve game rules/model behavior; add a small usable JavaFX UI and appropriate tests; avoid unrelated refactors; validate; report changed files and exact validation results; stop after implementation and verification.",
+        "source": "user"
+      },
+      "depends_on": null,
+      "type": "text",
+      "options": []
+    }
+  ]
+}
