@@ -8,6 +8,7 @@ import java.util.Scanner;
  * /** A player who chooses moves by entering coordinates in the console. 
  */
 public class HumanPlayer extends Player {
+    private static boolean secondDefaultNameAvailable;
     private final Scanner scanner;
 
     /**
@@ -19,8 +20,20 @@ public class HumanPlayer extends Player {
      * @throws IllegalArgumentException if {@code marker} is not {@code X} or {@code O}
      */
     public HumanPlayer(char marker, Scanner scanner) {
-        super(marker, "Player #1");
+        super(marker, defaultName(marker));
         this.scanner = Objects.requireNonNull(scanner, "scanner");
+    }
+
+    private static synchronized String defaultName(char marker) {
+        if (marker == 'X') {
+            secondDefaultNameAvailable = true;
+            return "Player #1";
+        }
+        if (marker == 'O' && secondDefaultNameAvailable) {
+            secondDefaultNameAvailable = false;
+            return "Player #2";
+        }
+        return "Player #1";
     }
 
     /** Prompts for coordinates until this player's marker is placed successfully. */

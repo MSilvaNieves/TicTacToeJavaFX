@@ -10,6 +10,7 @@ import java.util.Random;
  * A player that chooses randomly from the currently available cells. 
  */
 public class CpuPlayer extends Player {
+    private static boolean secondDefaultNameAvailable;
     private final Random random;
 
     /**
@@ -36,8 +37,20 @@ public class CpuPlayer extends Player {
      * @throws IllegalArgumentException if {@code marker} is not {@code X} or {@code O}
      */     
     public CpuPlayer(char marker, Random random) {
-        super(marker, "CPU #1");
+        super(marker, defaultName(marker));
         this.random = Objects.requireNonNull(random, "random");
+    }
+
+    private static synchronized String defaultName(char marker) {
+        if (marker == 'X') {
+            secondDefaultNameAvailable = true;
+            return "CPU #1";
+        }
+        if (marker == 'O' && secondDefaultNameAvailable) {
+            secondDefaultNameAvailable = false;
+            return "CPU #2";
+        }
+        return "CPU #1";
     }
     
 
